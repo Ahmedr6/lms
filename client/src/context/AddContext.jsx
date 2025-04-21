@@ -44,11 +44,14 @@ return totalRating / course.courseRatings.length
             return  humanizeDuration(time*60*100 ,{units:['h','m']})
         }
         //function to claculate the number of the lectures in the course 
-        const calculateNoOfLectures=(lecture)=>{
+        const calculateNoOfLectures=(course)=>{
             let totalLectures =0;
             course.courseContent.forEach(chapter=>{
-                
-            })
+             if(Array.isArray(chapter.chatperContent)){
+                totalLectures+=chapter.chapterContent.length
+             }   
+            });
+            return totalLectures;
 
         }
 
@@ -56,7 +59,8 @@ return totalRating / course.courseRatings.length
 fetchAllCourses()
     },[])
     const value ={
-        currency ,allCourses, navigate,  calculateRating
+        currency ,allCourses, navigate,  calculateRating ,calculateChapterTime ,calculateCourseDuration
+        , calculateNoOfLectures
 
     }
 return(
